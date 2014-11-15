@@ -30,8 +30,17 @@ var vcardSchema = mongoose.Schema({
     Age: Number
 })
 
+var postSchema = mongoose.Schema({
+    uid: {type: mongoose.Schema.Types.ObjectId, ref: 'user'},
+    title: String,
+    content: String
+})
+
 app.db = {
-	model: mongoose.model('users', vcardSchema)
+	model: {
+		User: mongoose.model('user', vcardSchema),
+		Post: mongoose.model('post', postSchema)
+	}
 };
 
 // all environments
