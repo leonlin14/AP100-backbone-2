@@ -61,6 +61,7 @@ app.put('/1/user/:nickname', api.update);
 app.delete('/1/user/:nickname', api.delete);
 
 app.get('/1/user/age/:age', api.readByAge);
+app.get('/1/user/age/:from/:to', api.readByAgeRange);
 
 
 // Profile
