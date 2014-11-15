@@ -7,7 +7,10 @@ var app = app || {};
 * MODELS
 **/
 app.Users = Backbone.Model.extend({
-  url: '/1/user/age/30/40/',
+  url: function() {
+    return '/1/user/age' + this.filter;
+  },
+  filter: '/30/40/',
   defaults: {
     errors: [],
     errfor: {},
@@ -22,6 +25,7 @@ app.ListView = Backbone.View.extend({
 	el: '#userList',
   template: _.template( $('#tmpl-user-list').html() ),
   events: {
+    'click #20': 'age20'
   },
   initialize: function() {
     this.model = new app.Users();
@@ -31,6 +35,10 @@ app.ListView = Backbone.View.extend({
   },
   render: function() {
     this.$el.html(this.template( this.model.attributes ));
+  },
+  age20: function() {
+    this.model.filter = '/20/29';
+    this.model.fetch();
   },
 });
 

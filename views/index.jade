@@ -5,6 +5,11 @@ block content
   div#userList
 
   script(type='text/template', id='tmpl-user-list')
+    .btn-group(role='group')
+      button.btn.btn-default(type='button' id='20') 20 ~ 29
+      button.btn.btn-default(type='button' id='30') 30 ~ 39
+      button.btn.btn-default(type='button' id='40') 40 ~ 49
+      button.btn.btn-default(type='button' id='50') 50 ~ 59
     h3 User List
     ul
       <% _.each(users, function(user) { %>
