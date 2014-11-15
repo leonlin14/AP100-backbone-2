@@ -38,16 +38,6 @@ exports.readByAge = function(req, res){
 	});
 };
 
-exports.readByAge = function(req, res){
-	var model = req.app.db.model;
-	var age = req.params.age;
-
-	var vcard = model.find({Age: age}, function(err, vcard) {
-		res.send(vcard);
-		res.end();
-	});
-};
-
 exports.update = function(req, res){
 	var nickname = req.params.nickname;
 

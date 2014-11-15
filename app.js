@@ -62,6 +62,7 @@ app.delete('/1/user/:nickname', api.delete);
 
 app.get('/1/user/age/:age', api.readByAge);
 
+
 // Profile
 app.post('/1/user/:nickname/:type', api.upload);
 

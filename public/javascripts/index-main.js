@@ -7,7 +7,7 @@ var app = app || {};
 * MODELS
 **/
 app.Users = Backbone.Model.extend({
-  url: '/1/user/',
+  url: '/1/user/age/30',
   defaults: {
     errors: [],
     errfor: {},
