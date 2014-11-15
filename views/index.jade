@@ -8,7 +8,7 @@ block content
     h3 User List
     ul
       <% _.each(users, function(user) { %>
-      li <%= user.Name %>
+      li <%= user.Name %> (Age: <%= user.Age %> )
       <% }); %>
 
   script(src='vendor/jquery/dist/jquery.min.js', type='text/javascript')
