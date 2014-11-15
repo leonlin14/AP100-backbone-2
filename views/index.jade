@@ -1,15 +1,16 @@
 extends layout
 
 block content
-  h1= title
-  div#userList
+  .container
+    h1= title
+    div#userList
 
   script(type='text/template', id='tmpl-user-list')
     .btn-group(role='group')
-      button.btn.btn-default(type='button' id='20') 20 ~ 29
-      button.btn.btn-default(type='button' id='30') 30 ~ 39
-      button.btn.btn-default(type='button' id='40') 40 ~ 49
-      button.btn.btn-default(type='button' id='50') 50 ~ 59
+      button.btn.btn-default#filter(type='button' data-filter='/20/29/') 20 ~ 29
+      button.btn.btn-default#filter(type='button' data-filter='/30/39/') 30 ~ 39
+      button.btn.btn-default#filter(type='button' data-filter='/40/49/') 40 ~ 49
+      button.btn.btn-default#filter(type='button' data-filter='/50/59/') 50 ~ 59
     h3 User List
     ul
       <% _.each(users, function(user) { %>

@@ -25,7 +25,7 @@ app.ListView = Backbone.View.extend({
 	el: '#userList',
   template: _.template( $('#tmpl-user-list').html() ),
   events: {
-    'click #20': 'age20'
+    'click #filter': 'onFilter'
   },
   initialize: function() {
     this.model = new app.Users();
@@ -36,8 +36,11 @@ app.ListView = Backbone.View.extend({
   render: function() {
     this.$el.html(this.template( this.model.attributes ));
   },
-  age20: function() {
-    this.model.filter = '/20/29';
+  onFilter: function(e) {
+    var me = $(e.target);
+    var filter = me.data('filter');
+
+    this.model.filter = filter;
     this.model.fetch();
   },
 });

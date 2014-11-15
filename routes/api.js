@@ -45,7 +45,8 @@ exports.readByAgeRange = function(req, res){
 
 	model.aggregate([
 	  { $match: { Age: {$gte: from} } },
-	  { $match: { Age: {$lte: to} } }
+	  { $match: { Age: {$lte: to} } }, 
+	  { $sort: {Age: 1} }
 	])
 	.exec(function(err, users) {
 		res.send({
