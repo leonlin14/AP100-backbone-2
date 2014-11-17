@@ -7,10 +7,10 @@ block content
 
   script(type='text/template', id='tmpl-user-list')
     .btn-group(role='group')
-      button.btn.btn-info#filter(type='button' data-filter='/20/29/') 20 ~ 29
-      button.btn.btn-info#filter(type='button' data-filter='/30/39/') 30 ~ 39
-      button.btn.btn-info#filter(type='button' data-filter='/40/49/') 40 ~ 49
-      button.btn.btn-info#filter(type='button' data-filter='/50/59/') 50 ~ 59
+      button.btn.btn-info#filter(data-filter='/20/29/') 20 ~ 29
+      button.btn.btn-info#filter(data-filter='/30/39/') 30 ~ 39
+      button.btn.btn-info#filter(data-filter='/40/49/') 40 ~ 49
+      button.btn.btn-info#filter(data-filter='/50/59/') 50 ~ 59
     h3 User List
     ul
       <% _.each(users, function(user) { %>
@@ -20,4 +20,4 @@ block content
   script(src='vendor/jquery/dist/jquery.min.js', type='text/javascript')
   script(src='vendor/underscore/underscore-min.js', type='text/javascript')
   script(src='vendor/backbone/backbone.js', type='text/javascript')
-  script(src='javascripts/index-main.js', type='text/javascript')
+  script(src='javascripts/index-age.js', type='text/javascript')

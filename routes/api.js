@@ -1,7 +1,7 @@
 var vcard;
 
 exports.create = function(req, res){
-	var model = req.app.db.model;
+	var model = req.app.db.model.User;
 
 	var person = {
 		nickname: req.query.nickname,
@@ -16,7 +16,7 @@ exports.create = function(req, res){
 };
 
 exports.read = function(req, res){
-	var model = req.app.db.model;
+	var model = req.app.db.model.User;
 
 	var vcard = model.find({}, function(err, vcard) {
 		res.send({
@@ -27,7 +27,7 @@ exports.read = function(req, res){
 };
 
 exports.readByAge = function(req, res){
-	var model = req.app.db.model;
+	var model = req.app.db.model.User;
 	var age = req.params.age;
 
 	var vcard = model.find({ Age: age }, function(err, vcard) {
@@ -39,7 +39,7 @@ exports.readByAge = function(req, res){
 };
 
 exports.readByAgeRange = function(req, res){
-	var model = req.app.db.model;
+	var model = req.app.db.model.User;
 	var from = parseInt(req.params.from);
 	var to = parseInt(req.params.to);
 
