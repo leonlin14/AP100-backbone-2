@@ -56,6 +56,25 @@ exports.readByAgeRange = function(req, res){
 	});
 };
 
+exports.createPost = function(req, res){
+	var model = req.app.db.model.Post;
+	var uid = '545dc0b2a7678639e78366f1';
+	var title = req.query.title;
+	var content = req.query.content;
+
+	var post = {
+		uid: uid,
+		title: title,
+		content: content
+	};
+
+	var postDocument = new model(post);
+	postDocument.save();
+
+	res.send({status: 'OK'});
+};
+
+
 exports.update = function(req, res){
 	var nickname = req.params.nickname;
 
