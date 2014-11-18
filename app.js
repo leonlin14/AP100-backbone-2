@@ -36,16 +36,16 @@ var postSchema = mongoose.Schema({
     content: String
 });
 
-//var mapAgeSchema = new mongoose.Schema({
-//    value: {type: Number, defult: 0}
-//});
+var mapAgeSchema = new mongoose.Schema({
+    value: {type: Number, defult: 0}
+});
 
 app.db = {
 	model: {
 		User: mongoose.model('user', vcardSchema),
-		Post: mongoose.model('post', postSchema)
+		Post: mongoose.model('post', postSchema),
     /* MapReduce */
-    //MapAge: mongoose.model('map_age', mapAgeSchema)
+    MapAge: mongoose.model('map_age', mapAgeSchema)
 	}
 };
 
@@ -79,7 +79,7 @@ app.delete('/1/user/:nickname', api.delete);
 app.get('/1/user/age/:age', api.readByAge);
 app.get('/1/user/age/:from/:to', api.readByAgeRange);
 
-//app.get('/1/user/map/age', api.mapByAge);
+app.get('/1/user/map/age', api.mapByAge);
 
 
 // Profile

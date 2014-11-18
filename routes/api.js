@@ -56,13 +56,12 @@ exports.readByAgeRange = function(req, res){
 	});
 };
 
-/*
 exports.mapByAge = function(req, res){
 	var model = req.app.db.model.User;
 
 	model
 		.mapReduce(
-			function() {emit(this.Age, this.Name;)},
+			function() {emit(this.Age, this.Name)},
 			function(key, values) {
 				return values.toString();
 			},
@@ -72,7 +71,6 @@ exports.mapByAge = function(req, res){
 			}
 		);
 };
-*/
 
 exports.createPost = function(req, res){
 	var model = req.app.db.model.Post;
