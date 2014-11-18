@@ -28,18 +28,24 @@ var vcardSchema = mongoose.Schema({
     Email: String,
     Address: String,
     Age: Number
-})
+});
 
 var postSchema = mongoose.Schema({
     uid: {type: mongoose.Schema.Types.ObjectId, ref: 'user'},
     title: String,
     content: String
-})
+});
+
+//var mapAgeSchema = new mongoose.Schema({
+//    value: {type: Number, defult: 0}
+//});
 
 app.db = {
 	model: {
 		User: mongoose.model('user', vcardSchema),
 		Post: mongoose.model('post', postSchema)
+    /* MapReduce */
+    //MapAge: mongoose.model('map_age', mapAgeSchema)
 	}
 };
 
@@ -62,6 +68,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', require('./routes/index').index);
+app.get('/post', require('./routes/index').index);
 
 // REST API
 app.post('/1/user', api.create);
@@ -72,11 +79,14 @@ app.delete('/1/user/:nickname', api.delete);
 app.get('/1/user/age/:age', api.readByAge);
 app.get('/1/user/age/:from/:to', api.readByAgeRange);
 
+//app.get('/1/user/map/age', api.mapByAge);
+
 
 // Profile
 app.post('/1/user/:nickname/:type', api.upload);
 
 app.post('/1/post', api.createPost);
+app.get('/1/post', api.readPost);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

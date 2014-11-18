@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .container
+    h1= title
+    div#postList
+
+  script(type='text/template', id='tmpl-post-list')
+    h3 Post List
+    ul
+      <% _.each(posts, function(post) { %>
+      li <%= post.Title %>, <%= post.uid.Name %>: <%= post.content %>
+      <% }); %>
+
+  script(src='vendor/jquery/dist/jquery.min.js', type='text/javascript')
+  script(src='vendor/underscore/underscore-min.js', type='text/javascript')
+  script(src='vendor/backbone/backbone.js', type='text/javascript')
+  script(src='javascripts/index-post.js', type='text/javascript')

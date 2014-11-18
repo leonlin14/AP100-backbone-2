@@ -56,6 +56,24 @@ exports.readByAgeRange = function(req, res){
 	});
 };
 
+/*
+exports.mapByAge = function(req, res){
+	var model = req.app.db.model.User;
+
+	model
+		.mapReduce(
+			function() {emit(this.Age, this.Name;)},
+			function(key, values) {
+				return values.toString();
+			},
+			{
+				query: {Age: {$gt: 30}},
+				out: 'map_ages'
+			}
+		);
+};
+*/
+
 exports.createPost = function(req, res){
 	var model = req.app.db.model.Post;
 	var uid = '545dc0b2a7678639e78366f1';
@@ -74,6 +92,19 @@ exports.createPost = function(req, res){
 	res.send({status: 'OK'});
 };
 
+exports.readPost = function(req, res){
+	var model = req.app.db.model.Post;
+
+	model
+		.find({})
+		.populate('uid')
+		.exec(function(err, posts) {
+			res.send({
+				posts: posts
+			});
+			res.end();
+		});
+};
 
 exports.update = function(req, res){
 	var nickname = req.params.nickname;
