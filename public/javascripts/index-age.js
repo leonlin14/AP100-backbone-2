@@ -16,15 +16,26 @@ app.Users = Backbone.Model.extend({
     users: []
   }
 });
+app.UserInfo = Backbone.Model.extend({
+  url: function() {
+    return '/1/user/' + this.attributes.id;
+  },
+  defaults: {
+    errors: [],
+    errfor: {},
+    user: {}
+  }
+});
 
 /**
 * VIEWS
 **/
 app.ListView = Backbone.View.extend({
 	el: '#userList',
-  template: _.template( $('#tmpl-user-list').html() ),
+  template: _.template($('#tmpl-user-list').html()),
   events: {
-    'click #filter': 'onFilter'
+    'click #filter': 'onFilter',
+    'click [data-tag=user]': 'userProfile'
   },
   initialize: function() {
     var self = this;
@@ -45,9 +56,8 @@ app.ListView = Backbone.View.extend({
     });
   },
   render: function() {
-    this.$el.html(this.template( this.model.attributes ));
-
-    this.$el.find('[data-tag=user]').each(function () {
+    this.$el.html(this.template(this.model.attributes));
+    this.$el.find('[data-tag=user]').each(function() {
        var me = $(this);
        var age = '' + me.data('age');
 
@@ -58,14 +68,34 @@ app.ListView = Backbone.View.extend({
     var me = $(e.target);
     var filter = me.data('filter');
 
-    this.$el.find('[data-tag=user]').each(function () {
+    this.$el.find('[data-tag=user]').each(function() {
       $(this).addClass('hide');
     });
 
-    this.$el.find('.' + filter).each(function () {
+    this.$el.find('.' + filter).each(function() {
       $(this).removeClass('hide');
     });
   },
+  userProfile: function(e) {
+    var id = $(e.target).data('user-id');
+
+    app.userView.model.set('id', id);
+    app.userView.model.fetch();
+  }
+});
+app.UserView = Backbone.View.extend({
+  el: '#userInfo',
+  template: _.template($('#tmpl-user-info').html()),
+  events: {
+  },
+  initialize: function() {
+    this.model = new app.UserInfo();
+    this.listenTo(this.model, 'sync', this.render);
+    this.listenTo(this.model, 'change', this.render);
+  },
+  render: function() {
+    this.$el.html(this.template(this.model.attributes));
+  }
 });
 
 /**
@@ -73,4 +103,5 @@ app.ListView = Backbone.View.extend({
 **/
 $(document).ready(function() {
   app.listView = new app.ListView();
+  app.userView = new app.UserView();
 });

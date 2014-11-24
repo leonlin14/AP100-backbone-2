@@ -73,6 +73,7 @@ app.get('/post', require('./routes/index').index);
 // REST API
 app.post('/1/user', api.create);
 app.get('/1/user', api.read);
+app.get('/1/user/:id', api.readOneByUserId);
 app.put('/1/user/:nickname', api.update);
 app.delete('/1/user/:nickname', api.delete);
 
