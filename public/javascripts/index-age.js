@@ -51,7 +51,6 @@ app.ListView = Backbone.View.extend({
        var me = $(this);
        var age = '' + me.data('age');
 
-       console.log(age);
        me.addClass('age-' + age.slice(0, 1) + '0');
     });
   },
@@ -63,7 +62,6 @@ app.ListView = Backbone.View.extend({
       $(this).addClass('hide');
     });
 
-    console.log(filter);
     this.$el.find('.' + filter).each(function () {
       $(this).removeClass('hide');
     });
