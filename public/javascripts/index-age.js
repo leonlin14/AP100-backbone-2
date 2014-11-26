@@ -43,7 +43,7 @@ app.ListView = Backbone.View.extend({
   template: _.template($('#tmpl-user-list').html()),
   events: {
     'click #filter': 'onFilter',
-    'click [data-tag=user]': 'userProfile'
+    //'click [data-tag=user]': 'userProfile'
   },
   initialize: function() {
     var self = this;
@@ -134,9 +134,35 @@ app.UserView = Backbone.View.extend({
 });
 
 /**
+* ROUTES
+**/
+app.UserRoutes = Backbone.Router.extend({
+  routes: {
+    ':id': 'userID'
+  },
+  userID: function(id) {
+    var model = app.listView.collections.get(id);
+
+    if(model) return app.userView.model.set('user', model.get('user'));
+
+    model = new app.UserInfo();
+    model.set('id', id);
+    model.fetch({
+      success: function() {
+        app.userView.model.set('user', model.get('user'));
+        app.listView.collections.push(model);
+      }
+    });
+  }
+});
+
+/**
 * BOOTUP
 **/
 $(document).ready(function() {
   app.listView = new app.ListView();
   app.userView = new app.UserView();
+
+  app.userRoutes = new app.UserRoutes();
+  Backbone.history.start();
 });
