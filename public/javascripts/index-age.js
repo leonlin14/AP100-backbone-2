@@ -8,7 +8,7 @@ var app = app || {};
 **/
 app.Users = Backbone.Model.extend({
   url: function() {
-    return '/1/user';
+    return '/1/user/';
   },
   defaults: {
     errors: [],
@@ -20,6 +20,7 @@ app.UserInfo = Backbone.Model.extend({
   url: function() {
     return '/1/user/' + this.attributes.id;
   },
+  id: '',
   defaults: {
     errors: [],
     errfor: {},
@@ -105,6 +106,8 @@ app.UserView = Backbone.View.extend({
   el: '#userInfo',
   template: _.template($('#tmpl-user-info').html()),
   events: {
+    'click .btn-edit': 'edit',
+    'click .btn-save': 'save'
   },
   initialize: function() {
     this.model = new app.UserInfo();
@@ -113,6 +116,20 @@ app.UserView = Backbone.View.extend({
   },
   render: function() {
     this.$el.html(this.template(this.model.attributes));
+  },
+  edit: function() {
+    this.$el.find('.non-editable').addClass('hide');
+    this.$el.find('.editable').removeClass('hide');
+  },
+  save: function() {
+    this.model.save({
+      id: this.$el.find('[name=id]').val(),
+      user: {
+        Name: this.$el.find('[name=name]').val(),
+        Email: this.$el.find('[name=email]').val(),
+        Address: this.$el.find('[name=address]').val()
+      }
+    });
   }
 });
 
